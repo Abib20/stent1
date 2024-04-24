@@ -1,0 +1,253 @@
+.link {
+  text-decoration: none;
+}
+
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  background-color: #2196c6;
+}
+
+.header_content {
+  padding: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.hc_lp, .hc_rp {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.hc_lp > :first-child, .hc_rp > :first-child {
+  margin-right: 10px;
+}
+
+.enter {
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.content_section {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+footer {
+  background-color: #2196c6;
+}
+
+.footer_content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+p {
+  text-align: center;
+}
+
+#table>p{
+  font-size:xx-small;
+}
+
+.myButton {
+  /* Green */
+  background-color: #2196c6; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 12px 4px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #008cba;
+  border-radius: 8px;
+}
+
+.myButton:hover {
+  background-color: #008cba;
+  color: white;
+}
+
+.myButton1 {
+  background-color: #2196c6; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 12px 4px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #008cba;
+  border-radius: 8px;
+}
+
+.myButton1:hover {
+  background-color: #008cba;
+  color: white;
+}
+
+.mysButton {
+  /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+}
+
+.choose {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form_radio_btn {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.form_radio_btn input[type="radio"] {
+  display: none;
+}
+
+.form_radio_btn label {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0px 15px;
+  line-height: 34px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  user-select: none;
+}
+
+/* Checked */
+.form_radio_btn input[type="radio"]:checked + label {
+  background: #9ac5ce;
+}
+
+/* Hover */
+.form_radio_btn label:hover {
+  color: #666;
+}
+
+/* Disabled */
+.form_radio_btn input[type="radio"]:disabled + label {
+  background: #efefef;
+  color: #666;
+} 
+
+button {
+  /* Green */
+  background-color: #2196c6; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 12px 4px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #008cba;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #008cba;
+  color: white;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login_form {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.enter_button {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .women_img, .site_name, .exit_text{
+    display: none;
+  }
+
+  .exit_icon {
+    display: block;
+  }
+
+  .content {
+    font-size: x-large;
+  }
+  
+}
+
+@media (min-width: 769px) and (max-width: 2560px) {
+  .exit_icon {
+    display: none;
+  }
+
+  a + div {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 40px;
+  }
+
+}
+
+img {max-width: 100%;}
+
+.fieldWrapper {
+  display: flex;
+  justify-content: space-between;
+}
