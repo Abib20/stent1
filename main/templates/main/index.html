@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="women_img">
+  <img src="/static/assets/images/women.png" class="d-inline-block align-top" />
+</div>
+<div class="menu">
+  <p style="margin-top: 20px">
+    Ежедневно отмечайте данные своего самочувствия.
+  </p>
+  {% if user.is_authenticated %}
+  <button onclick="window.location.href += 'report';">Пройти опрос</button>
+  {%else%}
+  <button title="Вам необходимо войти" disabled onclick="window.location.href += 'report';">
+    Пройти опрос
+  </button>
+  {% endif %}
+  {% if user.is_staff or user.is_superuser %}
+  <p style="margin-top: 20px">
+    Вы также можете зарегистрироваться нажав кнопку ниже
+  </p>
+  <button title="Переход на страницу регистрации" onclick="window.location.href += 'register';">
+    Перейти к странице регистрации
+  </button>
+  <p style="margin-top: 20px">
+    Вы также можете взглянуть на графики нажав кнопку ниже
+  </p>
+  <button title="Просмотреть графики" onclick="window.location.href += 'graphics';">
+    Просмотреть графики
+  </button>
+  <p style="margin-top: 20px">
+    Вы также можете скачать собранные данные
+  </p>
+  <button title="Произвести выгрузку данных" onclick="window.location.href += 'admin/download/';">
+    Произвести выгрузку данных
+  </button>
+  {% endif %}
+</div>
+{%endblock%}
