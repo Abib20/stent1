@@ -1,0 +1,180 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="women_img">
+  <img src="/static/assets/images/women.png" class="d-inline-block align-top" />
+</div>
+<div class="card">
+  <div class="card-body rounded-top border-top p-5">
+    <form class="mb-4 mx-md-5" id="tssite" method="post">
+      <div class="row">
+        {% csrf_token %}
+        <div id="high_temperature" style="text-align: center">
+          <a>Ваша температура?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="ht1" type="radio" name="high_temperature" value="Yes" />
+              <label for="ht1" onclick="getNextQuestion()">37 и выше</label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="ht2" type="radio" name="high_temperature" value="No" />
+              <label for="ht2" onclick="getNextQuestion()">До 36.9</label>
+            </div>
+          </div>
+        </div>
+        <div id="runny_nose" style="text-align: center; display: none">
+          <a>Имеется ли насморк?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="rn1" type="radio" name="runny_nose" value="Yes" />
+              <label for="rn1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="rn2" type="radio" name="runny_nose" value="No" />
+              <label for="rn2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="no_smell" style="text-align: center; display: none">
+          <a>Чувствуете ли вы запахи?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="ns1" type="radio" name="no_smell" value="No" />
+              <label for="ns1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="ns2" type="radio" name="no_smell" value="Yes" />
+              <label for="ns2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="weakness" style="text-align: center; display: none">
+          <a>Чувствуете ли вы слабость, усталость?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="w1" type="radio" name="weakness" value="Yes" />
+              <label for="w1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="w2" type="radio" name="weakness" value="No" />
+              <label for="w2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="muscle_pain" style="text-align: center; display: none">
+          <a>Чувствуете ли вы боль в мышцах, суставах?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="mp1" type="radio" name="muscle_pain" value="Yes" />
+              <label for="mp1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="mp2" type="radio" name="muscle_pain" value="No" />
+              <label for="mp2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="nausea" style="text-align: center; display: none">
+          <a>Вас беспокоит тошнота?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="n1" type="radio" name="nausea" value="Yes" />
+              <label for="n1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="n2" type="radio" name="nausea" value="No" />
+              <label for="n2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="cough" style="text-align: center; display: none">
+          <a>Отмечается кашель?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="c1" type="radio" name="cough" value="Yes" />
+              <label for="c1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="c2" type="radio" name="cough" value="No" />
+              <label for="c2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="dyspnea" style="text-align: center; display: none">
+          <a>Отмечается одышка?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="dys1" type="radio" name="dyspnea" value="Yes" />
+              <label for="dys1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="dys2" type="radio" name="dyspnea" value="No" />
+              <label for="dys2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="diarrhea" style="text-align: center; display: none">
+          <a>Отмечаете ли вы диарею?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="dr1" type="radio" name="diarrhea" value="Yes" />
+              <label for="dr1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="dr2" type="radio" name="diarrhea" value="No" />
+              <label for="dr2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="vomiting" style="text-align: center; display: none">
+          <a>Имеется ли рвота?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="v1" type="radio" name="vomiting" value="Yes" />
+              <label for="v1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="v2" type="radio" name="vomiting" value="No" />
+              <label for="v2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="isCalled" style="text-align: center; display: none">
+          <a>Связывался ли с вами участковый врач в течение прошедшего дня?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="ic1" type="radio" name="isCalled" value="Yes" />
+              <label for="ic1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="ic2" type="radio" name="isCalled" value="No" />
+              <label for="ic2" onclick="getNextQuestion()">Нет</label>
+            </div>
+          </div>
+        </div>
+        <div id="GotPills" style="text-align: center; display: none">
+          <a>Получили ли вы лекарственные средства?</a>
+          <div>
+            <div class="form_radio_btn">
+              <input id="ic1" type="radio" name="GotPills" value="Да" />
+              <label for="ic1" onclick="getNextQuestion()">Да </label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="ic2" type="radio" name="GotPills" value="Нет" />
+              <label for="ic2" onclick="getNextQuestion()">Нет</label>
+            </div>
+            <div class="form_radio_btn">
+              <input id="ic3" type="radio" name="GotPills" value="Не нуждаюсь" />
+              <label for="ic3" onclick="getNextQuestion()">Не нуждаюсь</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="myButton1" onclick="showEndInfo()" id="send" type="submit"
+        style="display: none !important; text-align: center; margin: 0 auto">
+        Отправить результаты опроса
+      </button>
+    </form>
+  </div>
+</div>
+</div>
+{%endblock%}
