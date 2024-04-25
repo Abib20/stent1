@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ковид-Отчет</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/charts.css' %}" />
+    <script src="/static/js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header_content" onclick="window.location=window.location.origin">
+            <div class="hc_lp">
+                <img src="/static/assets/images/heart.png" height="40" />
+                <p class="site_name" class="link">ITMedicine</p>
+            </div>
+            <div class="hc_rp">
+                {% if user.is_authenticated %}
+                <p>{{ user.first_name }}</p>
+                <a href="{% url 'logout' %}" style="color: #ffffff; text-decoration: none">
+                    <p class="exit_text">Выйти</p>
+                    <img class="exit_icon" src="https://img.icons8.com/ios/50/ffffff/exit.png"
+                        style="height: 40px; width: 40px" />
+                </a>
+                {% else %}
+                <script>
+                    if (window.location.pathname != "{% url 'login' %}") {
+                        window.location.href =
+                            window.location.origin + "{% url 'login' %}";
+                    }
+                </script>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <div>
+        <div style="display: flex; align-items: center">
+            <div>
+                <canvas id="myChart" width="400" height="200"></canvas>
+            </div>
+            <div style="display: flex; flex-direction: column; margin: 5px">
+                <h2 id="all" onclick="get_all_reports()" style="color: orange"></h2>
+                <h2 id="health" onclick="get_health_reports()" style="color: greenyellow"></h2>
+                <h2 id="sick" onclick="get_sick_reports()" style="color: red"></h2>
+            </div>
+            <div style="display: flex; flex-direction: row; font-size: small;">
+                <div style="border: solid; margin: 5px">
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Высокая температура:&nbsp;</p>
+                        <p id="high_temperature"></p>
+                    </div>
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Насморк:&nbsp;</p>
+                        <p id="runny_nose"></p>
+                    </div>
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Нет запахов:&nbsp;</p>
+                        <p id="no_smell"></p>
+                    </div>
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Слабость:&nbsp;</p>
+                        <p id="weakness"></p>
+                    </div>
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Боль в мышцах:&nbsp;</p>
+                        <p id="muscle_pain"></p>
+                    </div>
+                </div>
+                <div style="border: solid; margin: 5px">
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Тошнота:&nbsp;</p>
+                        <p id="nausea"></p>
+                    </div>
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Кашель:&nbsp;</p>
+                        <p id="cough"></p>
+                    </div>
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Одышка:&nbsp;</p>
+                        <p id="dyspnea"></p>
+                    </div>
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Рвота:&nbsp;</p>
+                        <p id="vomiting"></p>
+                    </div>
+                    <div onclick="get_symptom_table(this.children[1].id)" style="
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 10px;
+                    ">
+                        <p>Диарея:&nbsp;</p>
+                        <p id="diarrhea"></p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; font-size: small;">
+                <button onclick="show_reports_table(this.children[1].id)">
+                    <p>Не отправили отчёт</p>
+                    <p id="without_reports"></p>
+                </button>
+                <button onclick="show_reports_table(this.children[1].id)">
+                    <p>Отсутствует звонок врача:&nbsp;</p>
+                    <p id="uncalled_reports"></p>
+                </button>
+                <button onclick="show_reports_table(this.children[1].id)">
+                    <p>3 и более симтомов:&nbsp;</p>
+                    <p id="reports_more_three"></p>
+                </button>
+                <button onclick="show_reports_table(this.children[1].id)">
+                    <p>Симптом 3 дня подряд:&nbsp;</p>
+                    <p id="reports_more_three_days"></p>
+                </button>
+            </div>
+            <button id="df_button" onclick="download_file()" disabled>
+                <a download="otchet.xslx"></a>
+                Выгрузить данные
+                </a>
+            </button>
+        </div>
+    </div>
+    <div id="table" align="center" border="1px" style='font-size: smaller;'></div>
+    <footer>
+        <div class="footer_content">
+            <p>© 2020-2022 Copyright:&nbsp;</p>
+            <p href="index.html" style="color: #ffffff; text-decoration: none">
+                ITMedicine.com
+            </p>
+        </div>
+    </footer>
+    <script src="/static/js/test_charts.js"></script>
+</body>
+
+</html>
